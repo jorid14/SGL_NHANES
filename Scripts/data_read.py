@@ -54,9 +54,20 @@ nhanes['Meal_Name'] = nhanes['DR1.030Z'].map(meal_name_lookup)
 print("Meal Name NA count is "+str(nhanes['Meal_Name'].isnull().sum()))
 
 
+#Create a time column, in a pandas time format
 
+#Remove the 5AM bias from the value in seconds
+def remove_time_bias(time_in):
+    midnight = 24*60*60
+    if (time_in >= midnight):
+        time_post = time_in - midnight
+    else: time_post = time_in
+    return round(time_post)
 
-
+#Create time variable and convert to time formatefrom DR1.020
+nhanes['Time'] = nhanes['DR1.020'].apply(remove_time_bias)
+nhanes['Time'] = nhanes['Time'].astype(int)
+nhanes['Time'] = nhanes['Time'].round().apply(pd.to_timedelta, unit='s')
 
 
 
