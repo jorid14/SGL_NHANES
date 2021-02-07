@@ -8,16 +8,17 @@ Created on Sat Jan 30 11:12:05 2021
 
 import pandas as pd
 
+#Read the NHANES dataset
 nhanes = pd.read_csv('../Data/nhanes.csv')
+
+#Use the variable lookup to filter out variables for reducing the dataset
+variable_lookup = pd.read_csv('../Analysis/Variable_Analysis_Lookup.csv')
+#Pull out the priority 0 variables, which are dropped from the start
+var_pri_0 = variable_lookup[variable_lookup['Priority'] == 0]
 
 
 #The following variables have been deemed irrelevant for this analysis, so they are dropped.
-
-
-nhanes = nhanes.drop(['DR1IVARA', 'DR1IVB12', 'DR1ICALC', 'DR1IIRON', 'DR1IZINC', 'DR1ISELE', 'DR1IP205',
-             'DR1IP226', 'RIDRETH3', 'DR1I_PF_CUREDMEAT', 'DR1I_PF_ORGAN', 'DR1I_PF_POULT', 'DR1I_PF_MPS_TOTAL',
-             'DR1I_PF_EGGS', 'DR1I_PF_NUTSDS', 'DR1I_PF_LEGUMES', 'DR1I_PF_TOTAL', 'DR1I_D_TOTAL',
-             'DR1I_D_TOTAL', 'DR1I_D_MILK', 'DR1I_D_YOGURT', 'DR1I_D_CHEESE', 'WTDRD1_6YR'], axis=1)
+nhanes = nhanes.drop(var_pri_0['Variable'], axis = 1)
 
 
 
@@ -30,9 +31,10 @@ nhanes['SDDSRVYR'].value_counts()
 #Create Survey Year variable based on lookup, mapping from CDC source
 survey_year_lookup = {4: '2005-2006', 5: '2009-2010', 6: '2011-2012', 7: '2013-2014', 8:'2015-2016', 9:'2017-2018'}
 nhanes['Survey_Year'] = nhanes['SDDSRVYR'].map(survey_year_lookup)
+#nhanes = nhanes.drop(['SDDSRVYR'], axis = 1)
 
 #Check for NAs
-print("Survey Year NA count is "+str(nhanes['Survey_Year'].isnull().sum()))
+#print("Survey Year NA count is "+str(nhanes['Survey_Year'].isnull().sum()))
 
 
 #Map the meal occasion data, based on the DR1.030Z encoding key
@@ -49,9 +51,10 @@ meal_name_lookup = {1: 'Breakfast', 2: 'Lunch', 3: 'Dinner', 4: 'Supper', 5:'Bru
 
 
 nhanes['Meal_Name'] = nhanes['DR1.030Z'].map(meal_name_lookup)
+#nhanes = nhanes.drop(['DR1.030Z'], axis = 1)
 
 #Check for NAs
-print("Meal Name NA count is "+str(nhanes['Meal_Name'].isnull().sum()))
+#print("Meal Name NA count is "+str(nhanes['Meal_Name'].isnull().sum()))
 
 
 #Create a time column, in a pandas time format
@@ -68,10 +71,13 @@ def remove_time_bias(time_in):
 nhanes['Time'] = nhanes['DR1.020'].apply(remove_time_bias)
 nhanes['Time'] = nhanes['Time'].astype(int)
 nhanes['Time'] = nhanes['Time'].round().apply(pd.to_timedelta, unit='s')
+#nhanes = nhanes.drop(['DR1.020'], axis = 1)
 
 
 
 
+
+nhanes.to_pickle('../Data/nhanes_pre_proc.pkl')
 
 
 
