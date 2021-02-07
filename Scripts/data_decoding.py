@@ -3,12 +3,19 @@
 """
 Created on Sun Feb  7 13:49:33 2021
 
-@author: jori
+@author: Jorid Topi
+
+
+This script performs data enconding and transformations:
+    1. Create Survey Year variable based on lookup, mapping from CDC source
+    2. Map the meal occasion data, based on the DR1.030Z encoding key and CDC source
+    3. Create a time column, in a pandas time format, using the DR1.020 time variable
+
 """
 
 import pandas as pd
 
-nhanes = pd.read_pickle('../Data/nhanes_1.pkl')
+nhanes = pd.read_pickle('../Data/nhanes_filtered.pkl')
 
 
 #Map the survey year data, based on the SDDSRVYR encoding key
@@ -61,4 +68,10 @@ nhanes['Time'] = nhanes['DR1.020'].apply(remove_time_bias)
 nhanes['Time'] = nhanes['Time'].astype(int)
 nhanes['Time'] = nhanes['Time'].round().apply(pd.to_timedelta, unit='s')
 #nhanes = nhanes.drop(['DR1.020'], axis = 1)
+
+
+#Save pipeline output
+nhanes.to_pickle('../Data/nhanes_post.pkl')
+nhanes.to_csv('../Data/nhanes_post.csv')
+
 
