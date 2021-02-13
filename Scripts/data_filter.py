@@ -38,25 +38,16 @@ seafood_df = nhanes[nhanes['DR1I_PF_SEAFD_TOT'] > 0]
 #Define the dataframe join key for pulling other food items consumed with seafood
 join_key = ['SEQN', 'DR1.030Z', 'DR1.020']
 
-#Obtain priority 1 variables from lookup, place them in a list
-var_pri_1 = variable_lookup[variable_lookup['Priority'] == 1]
-var_list = var_pri_1['Variable'].tolist()
-
-#Create variables to be dropped after the table join from priority 1
-drop_vars = [x for x in var_list if x not in join_key]
-string = '_x'
-drop_vars = [x + string for x in drop_vars]
-
-
-#Join in the other food items consumed with seafood, based on the defined key
-nhanes = pd.merge(seafood_df, nhanes, how='left', on=join_key)
-#Drop the left table variables, since left table is only used for filtering
-nhanes = nhanes.drop(drop_vars, axis = 1)
-#Drop additional unnecessary variables
-nhanes = nhanes.drop(['Unnamed: 0_x', 'Unnamed: 0_y'], axis = 1)
-#Strip the _y suffix from column names
-nhanes.columns = nhanes.columns.str.rstrip('_y')
-
+'''
+This filter obtains the ID of the person interviewed, the meal and time, 
+if there is at least one seafood item in this meal, time, for that person. 
+'''
+#Dropping the duplicates keeps a unique key for a meal where there is a seafood item
+seafood_df_key = seafood_df.drop_duplicates(join_key)
+#Dropp all other columns from this df, keep only the key columns
+seafood_df_key = seafood_df_key[join_key]
+#Join the nhanes df based on those keys
+nhanes = pd.merge(seafood_df_key, nhanes, how='left', on=join_key)
 
 
 #Save pipeline output
