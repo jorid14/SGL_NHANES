@@ -77,6 +77,7 @@ sf_group = sf_group.apply(pd.Series)
 sf_group = sf_group.rename({0: 'SF1', 1: 'SF2', 2: 'SF3', 3: 'SF4', 4: 'SF5', 5: 'SF6', 6: 'SF7'}, axis=1)
 sf_group.reset_index(level=0, inplace=True)
 sf_group.reset_index(level=0, inplace=True)
+sf_group.reset_index(level=0, inplace=True)
 
 #Obtain the seafood item count in each column. Result can be used as a statistic to count
 #the number of seafood species per meal
@@ -97,6 +98,7 @@ sf_des_group = sf_des_group.apply(pd.Series)
 #Rename the series columns and convert both grouping indecies to columns
 sf_des_group = sf_des_group.rename({0: 'SFD1', 1: 'SFD2', 2: 'SFD3', 3: 'SFD4', 4: 'SFD5', 5: 'SFD6', 
                                     6: 'SFD7', 7: 'SFD8', 8: 'SFD9'}, axis=1)
+sf_des_group.reset_index(level=0, inplace=True)
 sf_des_group.reset_index(level=0, inplace=True)
 sf_des_group.reset_index(level=0, inplace=True)
 
@@ -120,6 +122,7 @@ not_sf_group = not_sf_group.rename({0: 'SD1', 1: 'SD2', 2: 'SD3', 3: 'SD4', 4: '
                   7: 'SD8', 8: 'SD9', 9: 'SD10', 10: 'SD11', 11: 'SD12', 12: 'SD13', 13: 'SD14',
                   14: 'SD15', 15: 'SD16', 16: 'SD17', 17: 'SD18', 18: 'SD19', 19: 'SD20', 20: 'SD21', 
                   21: 'SD22'}, axis=1)
+not_sf_group.reset_index(level=0, inplace=True)
 not_sf_group.reset_index(level=0, inplace=True)
 not_sf_group.reset_index(level=0, inplace=True)
 
