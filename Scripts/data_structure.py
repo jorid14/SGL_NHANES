@@ -11,6 +11,7 @@ This script performs the data structuring tasks as identified by the project obj
 """
 
 import pandas as pd
+import numpy as np
 import re
 
 
@@ -46,3 +47,95 @@ food_type_cps.to_pickle('../Data/food_type_cps.pkl')
 seafood_cps.to_pickle('../Data/seafood_cps.pkl')
 side_dish_cps.to_pickle('../Data/side_dish_cps.pkl')
 seafood_df.to_pickle('../Data/seafood_df.pkl')
+
+
+
+'''
+This section structures the data by meal. First using seafood grouping, then side dish grouping
+'''
+
+#Obtain only required variables
+group_nhanes = nhanes[['SEQN', 'DR1.030Z', 'DESCRIPTION', 'species']]
+
+'''
+Seafood grouping
+'''
+
+#Obtain seafood items
+sf_nhanes = group_nhanes[group_nhanes['species'].notna()]
+
+#Group the seafood df by meal
+sf_meal_group = sf_nhanes.groupby(['SEQN', 'DR1.030Z'])
+
+#Obtain the unique seafood item for each meal
+sf_group = sf_meal_group.apply(lambda x: x['species'].unique())
+sf_group = sf_group.apply(pd.Series)
+
+#Rename the series columns and convert both grouping indecies to columns
+sf_group = sf_group.rename({0: 'SF1', 1: 'SF2', 2: 'SF3', 3: 'SF4', 4: 'SF5', 5: 'SF6', 6: 'SF7'}, axis=1)
+sf_group.reset_index(level=0, inplace=True)
+sf_group.reset_index(level=0, inplace=True)
+
+#Obtain the seafood item count in each column. Result can be used as a statistic to count
+#the number of seafood species per meal
+meal_fish_count = sf_group.count()
+
+
+'''
+Seafood description grouping
+'''
+
+#Group the seafood df by meal
+sf_meal_group = sf_nhanes.groupby(['SEQN', 'DR1.030Z'])
+
+#Obtain the unique seafood item for each meal
+sf_des_group = sf_meal_group.apply(lambda x: x['DESCRIPTION'].unique())
+sf_des_group = sf_des_group.apply(pd.Series)
+
+#Rename the series columns and convert both grouping indecies to columns
+sf_des_group = sf_des_group.rename({0: 'SFD1', 1: 'SFD2', 2: 'SFD3', 3: 'SFD4', 4: 'SFD5', 5: 'SFD6', 
+                                    6: 'SFD7', 7: 'SFD8', 8: 'SFD9'}, axis=1)
+sf_des_group.reset_index(level=0, inplace=True)
+sf_des_group.reset_index(level=0, inplace=True)
+
+
+'''
+Side dish grouping
+'''
+
+#Obtain non-seafood items
+not_sf_group = group_nhanes[group_nhanes['species'].isnull()]
+
+#Group the side dish df by meal
+not_sf_group = not_sf_group.groupby(['SEQN', 'DR1.030Z'])
+
+#Obtain the unique side dish descriptions for each meal
+not_sf_group = not_sf_group.apply(lambda x: x['DESCRIPTION'].unique())
+
+#Rename the series columns and convert both grouping indecies to columns
+not_sf_group = not_sf_group.apply(pd.Series)
+not_sf_group = not_sf_group.rename({0: 'D1', 1: 'D2', 2: 'D3', 3: 'D4', 4: 'D5', 5: 'D6', 6: 'D7',
+                  7: 'D8', 8: 'D9', 9: 'D10', 10: 'D11', 11: 'D12', 12: 'D13', 13: 'D14',
+                  14: 'D15', 15: 'D16', 16: 'D17', 17: 'D18', 18: 'D19', 19: 'D20', 20: 'D21', 21: 'D22'}, axis=1)
+not_sf_group.reset_index(level=0, inplace=True)
+not_sf_group.reset_index(level=0, inplace=True)
+
+#Obtain the first word in description item for each column
+for i in range(22):
+    idx_string = 'D' + str(i+1)
+    not_sf_group[idx_string] = not_sf_group[idx_string].fillna('None')
+    not_sf_group[idx_string] = not_sf_group[idx_string].apply(lambda x: re.search(r'^([^,])+', x).group(0) if re.search((r','), x) else x)
+
+#Re-apply NaNs for counting purposes
+not_sf_group_count = not_sf_group.replace('None', np.nan)
+
+#Obtain count of side dish item in each column. This can be used as a statistic to describe
+#the number of side dishes per meal.
+side_dish_count = not_sf_group_count.count()
+
+
+
+
+
+
+
