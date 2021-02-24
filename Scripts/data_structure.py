@@ -55,7 +55,9 @@ This section structures the data by meal. First using seafood grouping, then sid
 '''
 
 #Obtain only required variables
-group_nhanes = nhanes[['SEQN', 'DR1.030Z', 'DESCRIPTION', 'species']]
+group_nhanes = nhanes[['SEQN', 'DR1.030Z', 'DR1.020', 'DESCRIPTION', 'species']]
+#Define the grouping key by meal. Participant ID, Meal ID, and time of consumption
+meal_key = ['SEQN', 'DR1.030Z', 'DR1.020']
 
 '''
 Seafood grouping
@@ -65,7 +67,7 @@ Seafood grouping
 sf_nhanes = group_nhanes[group_nhanes['species'].notna()]
 
 #Group the seafood df by meal
-sf_meal_group = sf_nhanes.groupby(['SEQN', 'DR1.030Z'])
+sf_meal_group = sf_nhanes.groupby(meal_key)
 
 #Obtain the unique seafood item for each meal
 sf_group = sf_meal_group.apply(lambda x: x['species'].unique())
@@ -86,7 +88,7 @@ Seafood description grouping
 '''
 
 #Group the seafood df by meal
-sf_meal_group = sf_nhanes.groupby(['SEQN', 'DR1.030Z'])
+sf_meal_group = sf_nhanes.groupby(meal_key)
 
 #Obtain the unique seafood item for each meal
 sf_des_group = sf_meal_group.apply(lambda x: x['DESCRIPTION'].unique())
@@ -107,7 +109,7 @@ Side dish grouping
 not_sf_group = group_nhanes[group_nhanes['species'].isnull()]
 
 #Group the side dish df by meal
-not_sf_group = not_sf_group.groupby(['SEQN', 'DR1.030Z'])
+not_sf_group = not_sf_group.groupby(meal_key)
 
 #Obtain the unique side dish descriptions for each meal
 not_sf_group = not_sf_group.apply(lambda x: x['DESCRIPTION'].unique())
@@ -135,12 +137,9 @@ not_sf_group = not_sf_group.replace('None', np.nan)
 side_dish_count = not_sf_group.count()
 
 
-
 #Join the seafood species, seafood description, and derived side dish in a structured dataframe
-join_key = ['SEQN', 'DR1.030Z']
-
-df1 = pd.merge(sf_group, not_sf_group, how='left', on=join_key)
-df_final = pd.merge(df1, sf_des_group, how='left', on=join_key)
+df1 = pd.merge(sf_group, not_sf_group, how='left', on=meal_key)
+df_final = pd.merge(df1, sf_des_group, how='left', on=meal_key)
 
 df_final.to_pickle('../Data/df_final.pkl')
 df_final.to_csv('../Data/df_final.csv')
