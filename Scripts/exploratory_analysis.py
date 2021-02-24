@@ -12,7 +12,7 @@ This script performs the data structuring tasks as identified by the project obj
 
 import pandas as pd
 import nltk
-
+from collections import Counter
 
 
 #Read corpora
@@ -79,5 +79,29 @@ seafood_species_count = pd.merge(seafood_species_count, seafood_description_cont
 seafood_species_count = pd.merge(seafood_species_count, seafood_description_contains_and, how='left', left_on=['index'], right_on=['species'])
 
 seafood_species_count.to_csv('../Data/seafood_species_count.csv')
-seafood_df['DESCRIPTION'][(seafood_df.species == 'seafood')].to_csv('../Data/seafood_description.csv')
+seafood_df['DESCRIPTION'][(seafood_df.DR1I_PF_SEAFD_TOT > 0) & (seafood_df.species == 'seafood')].to_csv('../Data/seafood_description.csv')
+seafood_df.to_csv('../Data/seafood_df.csv')
+
+
+tokenizer = nltk.RegexpTokenizer(r"\w+")
+
+new_words = []
+for index, row in seafood_df.iterrows():
+    new_words_temp = tokenizer.tokenize(seafood_df['DESCRIPTION'][index])
+    for i in new_words_temp:
+        new_words.append(i)
+        
+counts = Counter(new_words)
+print(counts)
+
+#counts = pd.DataFrame(counts)
+counts = dict(counts)
+df = pd.DataFrame.from_dict(counts, orient = 'index')
+df = df.sort_values(by = 0, ascending=False)
+    
+df.to_csv('../Data/counts.csv')    
+
+
+
+
 
