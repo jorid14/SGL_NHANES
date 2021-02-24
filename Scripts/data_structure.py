@@ -114,28 +114,35 @@ not_sf_group = not_sf_group.apply(lambda x: x['DESCRIPTION'].unique())
 
 #Rename the series columns and convert both grouping indecies to columns
 not_sf_group = not_sf_group.apply(pd.Series)
-not_sf_group = not_sf_group.rename({0: 'D1', 1: 'D2', 2: 'D3', 3: 'D4', 4: 'D5', 5: 'D6', 6: 'D7',
-                  7: 'D8', 8: 'D9', 9: 'D10', 10: 'D11', 11: 'D12', 12: 'D13', 13: 'D14',
-                  14: 'D15', 15: 'D16', 16: 'D17', 17: 'D18', 18: 'D19', 19: 'D20', 20: 'D21', 21: 'D22'}, axis=1)
+not_sf_group = not_sf_group.rename({0: 'SD1', 1: 'SD2', 2: 'SD3', 3: 'SD4', 4: 'SD5', 5: 'SD6', 6: 'SD7',
+                  7: 'SD8', 8: 'SD9', 9: 'SD10', 10: 'SD11', 11: 'SD12', 12: 'SD13', 13: 'SD14',
+                  14: 'SD15', 15: 'SD16', 16: 'SD17', 17: 'SD18', 18: 'SD19', 19: 'SD20', 20: 'SD21', 
+                  21: 'SD22'}, axis=1)
 not_sf_group.reset_index(level=0, inplace=True)
 not_sf_group.reset_index(level=0, inplace=True)
 
 #Obtain the first word in description item for each column
 for i in range(22):
-    idx_string = 'D' + str(i+1)
+    idx_string = 'SD' + str(i+1)
     not_sf_group[idx_string] = not_sf_group[idx_string].fillna('None')
     not_sf_group[idx_string] = not_sf_group[idx_string].apply(lambda x: re.search(r'^([^,])+', x).group(0) if re.search((r','), x) else x)
 
 #Re-apply NaNs for counting purposes
-not_sf_group_count = not_sf_group.replace('None', np.nan)
+not_sf_group = not_sf_group.replace('None', np.nan)
 
 #Obtain count of side dish item in each column. This can be used as a statistic to describe
 #the number of side dishes per meal.
-side_dish_count = not_sf_group_count.count()
+side_dish_count = not_sf_group.count()
 
 
 
+#Join the seafood species, seafood description, and derived side dish in a structured dataframe
+join_key = ['SEQN', 'DR1.030Z']
 
+df1 = pd.merge(sf_group, not_sf_group, how='left', on=join_key)
+df_final = pd.merge(df1, sf_des_group, how='left', on=join_key)
 
+df_final.to_pickle('../Data/df_final.pkl')
+df_final.to_csv('../Data/df_final.csv')
 
 
