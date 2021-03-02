@@ -135,10 +135,6 @@ for i in range(22):
 #Re-apply NaNs for counting purposes
 not_sf_group = not_sf_group.replace('None', np.nan)
 
-#Obtain count of side dish item in each column. This can be used as a statistic to describe
-#the number of side dishes per meal.
-side_dish_count = not_sf_group.count()
-
 
 #Join the seafood species, seafood description, and derived side dish in a structured dataframe
 df1 = pd.merge(sf_group, not_sf_group, how='left', on=meal_key)
