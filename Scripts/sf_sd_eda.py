@@ -23,9 +23,19 @@ sd_tot = sf_to_sd_num.groupby('sf_type')['count'].sum()
 sf_to_sd_num = pd.merge(sf_to_sd_num, sd_tot, how='left', on=['sf_type'])
 #Calculate percetange of each side type as proportion to total side dishes for each seafood type
 sf_to_sd_num['pct'] = (sf_to_sd_num['count_x']/sf_to_sd_num['count_y'])*100
+sf_to_sd_num['pct'] = sf_to_sd_num['pct'].round(decimals = 2)
 #Sort by highest percentage
-sf_to_sd_num = sf_to_sd_num.sort_values(by=['pct'], ascending=False)
+sf_to_sd_num = sf_to_sd_num.sort_values(by=['sf_type', 'pct'], ascending=(True, False))
 
-
+sf_to_sd_num.to_csv('../Data/sf_to_sd_num.csv')
 #df_sf_to_sd2.to_json('../Data/df_sf_to_sd.json')
+
+
+sf_to_sd_num_grouped = sf_to_sd_num.groupby('sf_type')
+
+for name,group in sf_to_sd_num_grouped:
+    group = group.head(15)
+    group['sf_sd_pair'] = group['sf_type'] + ' - ' + group['sd_name']
+    group_plot = group.plot.barh(x='sf_sd_pair', y='pct', rot=0)
+    group_plot.invert_yaxis()
 
