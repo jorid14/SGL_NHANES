@@ -5,32 +5,22 @@ Created on Sun Feb  7 10:05:56 2021
 
 @author: Jorid Topi
 
-This is the priority 1 data pipeline, which is used for the primary objectives of the analysis.
-The variable analysis lookup is used to keep only the variables that were identified as useful
-for this analysis. The priority 2 and 3 variables are dropped.
-
-The meals that do not include seafood are then filtered out of the dataframe.
+This script finds the meals that contain seafood by obtaining the unique combination of 
+person interviewed, meal name, and meal time for every observation that contains seafood.
+Those unique key values are used to pull in the rest of the food items that are consumed in 
+that same meal, to create the filtered data frame. This is done for both the original NHANES
+and the NHANES_full dataframes. 
 
 """
 
 import pandas as pd
 
+'''
+This section performs the filtering for the original NHANES data file, and saves filtered
+dataframe to a pickle data file.
+'''
 #Read output of first data cleanup
 nhanes = pd.read_pickle('../Data/nhanes_pre_proc.pkl')
-
-
-#Use the variable lookup to filter out variables for reducing the dataset
-variable_lookup = pd.read_csv('../Analysis/Variable_Analysis_Lookup.csv')
-
-#Pull out the priority 2 and 3 variables, which are dropped in this pipeline
-var_pri_2 = variable_lookup[variable_lookup['Priority'] == 2]
-var_pri_3 = variable_lookup[variable_lookup['Priority'] == 3]
-
-
-#Drop the priority 2 and 3 variables
-nhanes = nhanes.drop(var_pri_2['Variable'], axis = 1)
-nhanes = nhanes.drop(var_pri_3['Variable'], axis = 1)
-
 
 #Obtain dataframe with seafood items
 seafood_df = nhanes[nhanes['DR1I_PF_SEAFD_TOT'] > 0]
@@ -49,9 +39,31 @@ seafood_df_key = seafood_df_key[join_key]
 #Join the nhanes df based on those keys
 nhanes = pd.merge(seafood_df_key, nhanes, how='left', on=join_key)
 
-
 #Save pipeline output
 nhanes.to_pickle('../Data/nhanes_filtered.pkl')
 
 
+'''
+This section performs the filtering for the NHANES_full data file, and saves filtered
+dataframe to a pickle data file.
+'''
+#Read output of first data cleanup for full df
+nhanes_full = pd.read_pickle('../Data/nhanes_full_pre_proc.pkl')
 
+#Obtain dataframe with seafood items for full df
+seafood_full_df = nhanes_full[nhanes_full['DR1I_PF_SEAFD_TOT'] > 0]
+
+'''
+This filter obtains the ID of the person interviewed, the meal and time, 
+if there is at least one seafood item in this meal, time, for that person. 
+'''
+
+#Dropping the duplicates keeps a unique key for a meal where there is a seafood item
+seafood_full_df_key = seafood_full_df.drop_duplicates(join_key)
+#Dropp all other columns from this df, keep only the key columns
+seafood_full_df_key = seafood_full_df_key[join_key]
+#Join the nhanes df based on those keys
+nhanes_full = pd.merge(seafood_full_df_key, nhanes_full, how='left', on=join_key)
+
+#Save pipeline output
+nhanes_full.to_pickle('../Data/nhanes_full_filtered.pkl')
