@@ -5,11 +5,8 @@ This script performs the initial EDA for the NHANES_full dataset
 
 """
 
-
 import pandas as pd
 import re
-
-
 
 #Read the structured dataframe
 nhanes_full = pd.read_pickle('../Data/nhanes_full_filtered.pkl')
@@ -30,23 +27,29 @@ for i in range(len(fped_cols)):
     else: fped_cols_cmp.append(fped_cols[i])
 
 
-
+#Remove the "DR1I_" prefix for simplification
 nhanes_full.columns = nhanes_full.columns.str.replace('^DR1I_', '')
+#Create a protein other total item, that excludes meats and seafood. Meant to capture
+#other protein sources at a higher level
+nhanes_full['PF_OTHER_TOT'] = nhanes_full['PF_TOTAL'] - nhanes_full['PF_MEAT_TOT'] - nhanes_full['PF_SEAFD_TOT']
 
-nhanes_full_fped = nhanes_full[fped_cols]
+#Create a list of the hierarchy 1 food components, for a higher level analysis
+food_cmp_hr1 = [
+'F_TOTAL',
+'V_TOTAL',
+'G_TOTAL',
+'D_TOTAL',
+'PF_OTHER_TOT',
+'PF_MEAT_TOT',
+'PF_SEAFD_TOT']
 
-nhanes_full_cmp = nhanes_full[fped_cols_cmp]
-nhanes_full_tot = nhanes_full[fped_cols_tot]
+#Aggregate and plot the hierarchy 1 food components for the whole seafood meal subset
+nhanes_food_cmp_hr1_sum = nhanes_full[food_cmp_hr1].sum()
+nhanes_food_cmp_hr1_sum = nhanes_food_cmp_hr1_sum.sort_values(ascending=False)
+nhanes_food_cmp_hr1_sum.plot.barh(title = 'Food Components Consumed with Seafood', xlabel = 'High Level Component', ylabel = 'Quantity in Grams')
 
-
-nhanes_full_cmp_sum = nhanes_full_cmp.sum()
-nhanes_full_tot_sum = nhanes_full_tot.sum()
-
-nhanes_full_cmp_sum = nhanes_full_cmp_sum.sort_values(ascending=False)
-nhanes_full_tot_sum = nhanes_full_tot_sum.sort_values(ascending=False)
-
-
-nhanes_full_cmp_sum.head(15).plot.barh()
-nhanes_full_tot_sum.plot.barh()
-
+#Explore the aggregate of the hierarchy 1 food components within the eat at home vs out groups
+nhanes_full_grouped = nhanes_full.groupby('eathome')[food_cmp_hr1].sum()
+nhanes_full_grouped.plot.bar(title = 'Food Components Consumed with Seafood: Home vs Out')
+    
 
