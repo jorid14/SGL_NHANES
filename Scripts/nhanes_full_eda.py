@@ -31,7 +31,7 @@ for i in range(len(fped_cols)):
 nhanes_full.columns = nhanes_full.columns.str.replace('^DR1I_', '')
 #Create a protein other total item, that excludes meats and seafood. Meant to capture
 #other protein sources at a higher level
-nhanes_full['PF_OTHER_TOT'] = nhanes_full['PF_TOTAL'] - nhanes_full['PF_MEAT_TOT'] - nhanes_full['PF_SEAFD_TOT']
+nhanes_full['PF_OTHER_TOT'] = nhanes_full['PF_TOTAL'] - nhanes_full['PF_MPS_TOTAL'] - nhanes_full['PF_SEAFD_TOT']
 
 #Create a list of the hierarchy 1 food components, for a higher level analysis
 food_cmp_hr1 = [
@@ -39,8 +39,6 @@ food_cmp_hr1 = [
 'V_TOTAL',
 'G_TOTAL',
 'D_TOTAL',
-'PF_OTHER_TOT',
-'PF_MEAT_TOT',
 'PF_SEAFD_TOT']
 
 #Aggregate and plot the hierarchy 1 food components for the whole seafood meal subset
