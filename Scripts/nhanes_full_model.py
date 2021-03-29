@@ -24,6 +24,8 @@ class LogisticReg:
     as well as the negative hessian of the log Likelihood (Fisher information)
     
     self.F_ij
+    
+    source: https://gist.github.com/rspeare/77061e6e317896be29c6de9a85db301d
     """
     
     def __init__(self,*args,**kwargs):#,**kwargs):
@@ -114,9 +116,19 @@ model_metrics = model_metrics.rename({0:'Succes Rate'},axis=1)
 
 #pvs_df.drop([0], axis=1).plot.line()
 
+import matplotlib.pyplot as plt
 
 
-#v_total_plot = df_train.groupby('seafood_meal')['V_TOTAL'].plot(kind='kde',xlim=(0,3),title='V_TOTAL',legend=True)
-#g_total_plot = df_train.groupby('seafood_meal')['G_TOTAL'].plot(kind='kde',xlim=(0,5),title='G_TOTAL',legend=True)
-#d_total_plot = df_train.groupby('seafood_meal')['D_TOTAL'].plot(kind='kde',xlim=(0,2),title='D_TOTAL',legend=True)
+
+v_total_plot = df_train.groupby('seafood_meal')['V_TOTAL'].plot(kind='kde',xlim=(0,3),title='V_TOTAL',legend=True)
+plt.savefig('V_TOTAL.png')
+plt.clf()
+g_total_plot = df_train.groupby('seafood_meal')['G_TOTAL'].plot(kind='kde',xlim=(0,5),title='G_TOTAL',legend=True)
+plt.savefig('G_TOTAL.png')
+plt.clf()
+d_total_plot = df_train.groupby('seafood_meal')['D_TOTAL'].plot(kind='kde',xlim=(0,2),title='D_TOTAL',legend=True)
+plt.savefig('D_TOTAL.png')
 #f_total_plot = df_train.groupby('seafood_meal')['F_TOTAL'].plot(kind='kde',xlim=(0,1),title='F_TOTAL',legend=True)
+
+
+
