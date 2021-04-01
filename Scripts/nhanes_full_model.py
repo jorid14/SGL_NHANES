@@ -103,13 +103,18 @@ def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num,
             sr = n_correct/len(y_pred)
             #Add success rate and variables used to list for storing outside loop
             pred_sr.append(sr)
+            var.remove('seafood_meal')
             var_list.append(var)
+            var_idx = cmb_output.index(var)
+            progress_pct = round(100 * var_idx / len(cmb_output), 2)
+            if (progress_pct%1==0):
+                print("Progress: "+str(progress_pct)+" %")
         
         #Calculate model execution time for combinatorial variable selection    
         cmb_time = time.time() - startTime  
         cmb_time_list = [cmb_time] * len(cmb_output)
         cmb_time_df = pd.DataFrame(cmb_time_list)
-        cmb_time_df = cmb_time_df.rename({0: 'Result Runtime (Seconds)'}, axis=1)
+        cmb_time_df = cmb_time_df.rename({0: 'Runtime(Seconds)'}, axis=1)
         #Create a dataframe with variables used, their success rate , and runtime   
         pred_sr_df = pd.DataFrame(pred_sr)
         pred_sr_df = pred_sr_df.rename({0: 'Success Rate'}, axis=1)
@@ -140,10 +145,11 @@ def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num,
         #Calculate model execution time for combinatorial variable selection    
         non_cmb_time = time.time() - startTime  
         non_cmb_time_df = pd.DataFrame([non_cmb_time ])
-        non_cmb_time_df = non_cmb_time_df.rename({0: 'Result Runtime (Seconds)'}, axis=1)
+        non_cmb_time_df = non_cmb_time_df.rename({0: 'Runtime(Seconds)'}, axis=1)
         #Create a dataframe with variables used and their success rate    
         pred_sr_df = pd.DataFrame(pred_sr)
         pred_sr_df = pred_sr_df.rename({0: 'Success Rate'}, axis=1)
+        var_list.remove('seafood_meal')
         var_list_df = pd.DataFrame([fped_vars])
         model_result = pd.concat([var_list_df, pred_sr_df, non_cmb_time_df], axis=1)
     
@@ -192,7 +198,19 @@ food_cmp_level3 = ['F_CITMLB', 'F_OTHER', 'F_JUICE',
                    'OILS', 'SOLID_FATS', 'ADD_SUGARS']    
 
 food_cmp_exp = ['F_TOTAL','V_TOTAL','G_TOTAL', 'V_DRKGR',
-                'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO']
+                'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO',
+                'V_STARCHY_OTHER', 'V_OTHER', 'V_LEGUMES', 'G_WHOLE', 'ADD_SUGARS']
+
+food_cmp_level4 = ['F_TOTAL', 
+                   'V_DRKGR', 'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO', 
+                   'V_STARCHY_OTHER', 'V_LEGUMES', 'V_OTHER',
+                   'G_WHOLE','G_REFINED', 
+                   'PF_TOTAL', 
+                   'D_YOGURT', 'D_MILK','D_CHEESE', 
+                   'OILS', 'SOLID_FATS', 'ADD_SUGARS'] 
+
+var_exp = ['V_DRKGR', 'V_REDOR_TOMATO', 'V_REDOR_OTHER',	'V_STARCHY_POTATO',	'V_LEGUMES',	
+ 'G_WHOLE',	'G_REFINED','PF_TOTAL',	'D_YOGURT',	'OILS',	'SOLID_FATS', 'ADD_SUGARS']
 
 #If running by script with arguments
 if len(sys.argv) > 1:
@@ -214,13 +232,13 @@ else:
     #Read the pre-processed dataframe.
     df = pd.read_csv('../Data/nhanes_full_pre_proc.csv')
     model_res_df = nhanes_full_log_reg(df = df,
-                                       fped_vars = food_cmp_exp, 
-                                        var_combinatorial = True, 
+                                       fped_vars = var_exp, 
+                                        var_combinatorial = False, 
                                         batch_run = False, 
                                         batch_num = 2, 
                                         batch_step = 1, 
-                                        non_sfd_class_n = 100, 
-                                        sfd_class_n = 100, 
+                                        non_sfd_class_n = 1000, 
+                                        sfd_class_n = 1000, 
                                         test_ratio = 0.2)
-    
+    #model_res_df.to_csv('model_res_df.csv')
     
