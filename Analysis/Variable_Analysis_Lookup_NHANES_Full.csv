@@ -8,7 +8,7 @@ DR1IGRMS,2,Gram weight of the food/individual component. May be useful for under
 DR1.020,1,"Time of eating occasion (HH:MM). May be useful for temporal analysis. May also be useful to understand relationship between side dishes consumed with seafood. I.e. confirming that it is indeed a seafood side dish, using time as a determinant.",Survey,,,
 DR1.030Z,1,"Name of eating occasion. May be useful for grouping by meal. A code mapping is available in https://wwwn.cdc.gov/nchs/nhanes/search/default.aspx, but may be different for each survey.",Survey,,,
 DR1.040Z,2,Did you eat this meal at home? May be useful for food sourcing. Needs mapping from documentation.,Survey,,,
-DR1IKCAL,2,"Energy (kcal). May be useful to undestand proportional seafood consumption by calories, similar to using food weight in grams.",Survey,,,
+DR1IKCAL,1,"Energy (kcal). May be useful to undestand proportional seafood consumption by calories, similar to using food weight in grams.",Survey,,,
 DR1IPROT,2,Protein (gm). May be useful to understand consumption based on a protein/carb/fat relationship.,Survey,,,
 DR1IPFAT,2,Total fat (gm). May be useful to understand consumption based on a protein/carb/fat relationship.,Survey,,,
 DR1IVARA,0,"Vitamin A, RAE (mcg). Not required for this analysis.",Survey,,,
