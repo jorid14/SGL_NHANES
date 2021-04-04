@@ -30,12 +30,17 @@ meal_key = ['SEQN', 'DR1.030Z', 'DR1.020']
 #Add meal key to FPED cols
 fped_cols_meal_key.extend(meal_key)
 
+#Add calories to FPED cols
+fped_cols_meal_key.extend(['DR1IKCAL'])
+
 #Remove the "DR1I_" prefix for simplification
 nhanes_full.columns = nhanes_full.columns.str.replace('^DR1I_', '')
 
 
-#Keep FPED cols and meal key
+#Keep FPED cols,calories, and meal key
 nhanes_full_filtered = nhanes_full[fped_cols_meal_key]
+#Add calories to aggregated variables
+fped_cols.extend(['DR1IKCAL'])
 #Group by meal key and aggregate on FPED columns
 nff_agg = nhanes_full_filtered.groupby(meal_key)[fped_cols].sum()
 
@@ -73,3 +78,4 @@ df_final = df_final[df_final['Meal_Name'].isin(meal_name_filter)]
 
 #Save pre-processed data
 df_final.to_pickle('../Data/nhanes_full_pre_proc.pkl')
+df_final.to_csv('../Data/nhanes_full_pre_proc.csv')
