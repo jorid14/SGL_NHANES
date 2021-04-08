@@ -16,6 +16,10 @@ import re
 nhanes_full = pd.read_pickle('../Data/nhanes_full_read.pkl')
 nhanes_full_cols = nhanes_full.columns.values.tolist()
 
+#Extract age for each participant
+age_table = nhanes_full[['SEQN','age']]
+age_table = age_table.drop_duplicates()
+
 #Create a list of all the FPED columns, removing the "DR1I_" prefix. 
 fped_cols = []
 fped_cols_meal_key = []
@@ -55,6 +59,8 @@ df_eathome['eathome'] = (df_eathome['eathome'] >= 1).astype(int)
 
 #Merge in the eathome variable
 df_final = nff_agg.merge(df_eathome, how='left', on=meal_key)
+#Merge in the participant's age
+df_final = df_final.merge(age_table, how='left', on=['SEQN'])
 
 
 #Determine if the meal has seafood in it. If yes, variable = 1, 0 otherwise
