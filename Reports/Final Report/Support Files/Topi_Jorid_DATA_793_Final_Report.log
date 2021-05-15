@@ -1,0 +1,517 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 MAY 2021 16:09
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Topi_Jorid_DATA_793_Final_Report.tex
+(./Topi_Jorid_DATA_793_Final_Report.tex
+LaTeX2e <2018-04-01> patch level 2
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (./spconf.sty)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks14
+\ex@=\dimen103
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen104
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks15
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+(./Topi_Jorid_DATA_793_Final_Report.aux
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `sssec:subsubhead' multiply defined.
+
+
+LaTeX Warning: Label `sssec:subsubhead' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `sssec:subsubhead' multiply defined.
+
+
+LaTeX Warning: Label `sssec:subsubhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `sssec:subsubhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `sssec:subsubhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `sec:pagestyle' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `fig:res' multiply defined.
+
+
+LaTeX Warning: Label `sec:pagestyle' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+
+LaTeX Warning: Label `ssec:subhead' multiply defined.
+
+)
+\openout1 = `Topi_Jorid_DATA_793_Final_Report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 41.
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count100
+\scratchdimen=\dimen114
+\scratchbox=\box28
+\nofMPsegments=\count101
+\nofMParguments=\count102
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count103
+\MPscratchDim=\dimen115
+\MPnumerator=\count104
+\makeMPintoPDFobject=\count105
+\everyMPtoPDFconversion=\toks21
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 44.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 46.
+
+Underfull \hbox (badness 1406) in paragraph at lines 67--68
+[]\OT1/ptm/m/n/10 The main FPED com-po-nents are Fruits, Veg-eta-bles,
+ []
+
+<sushi_meal_desc.png, id=1, 577.15625pt x 384.43625pt>
+File: sushi_meal_desc.png Graphic file (type png)
+<use sushi_meal_desc.png>
+Package pdftex.def Info: sushi_meal_desc.png  used on input line 74.
+(pdftex.def)             Requested size: 101.00385pt x 67.27734pt.
+<sushi_meal.png, id=3, 365.365pt x 229.85875pt>
+File: sushi_meal.png Graphic file (type png)
+<use sushi_meal.png>
+Package pdftex.def Info: sushi_meal.png  used on input line 80.
+(pdftex.def)             Requested size: 109.61034pt x 68.95815pt.
+[1{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
+
+ []
+
+<Log_Reg_Train_Score.png, id=12, 394.47375pt x 258.9675pt>
+File: Log_Reg_Train_Score.png Graphic file (type png)
+<use Log_Reg_Train_Score.png>
+Package pdftex.def Info: Log_Reg_Train_Score.png  used on input line 127.
+(pdftex.def)             Requested size: 118.34303pt x 77.69084pt.
+<Log_Reg_Test_Score.png, id=13, 384.43625pt x 260.975pt>
+File: Log_Reg_Test_Score.png Graphic file (type png)
+<use Log_Reg_Test_Score.png>
+Package pdftex.def Info: Log_Reg_Test_Score.png  used on input line 132.
+(pdftex.def)             Requested size: 115.33176pt x 78.29309pt.
+[2 <./sushi_meal_desc.png> <./sushi_meal.png> <./Log_Reg_Train_Score.png> <./Lo
+g_Reg_Test_Score.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--151
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
+
+ []
+
+<Coeff_Values_Top10.png, id=28, 362.7954pt x 489.2679pt>
+File: Coeff_Values_Top10.png Graphic file (type png)
+<use Coeff_Values_Top10.png>
+Package pdftex.def Info: Coeff_Values_Top10.png  used on input line 166.
+(pdftex.def)             Requested size: 108.83945pt x 146.7815pt.
+<P_Value_Means_Top10.png, id=29, 325.215pt x 489.2679pt>
+File: P_Value_Means_Top10.png Graphic file (type png)
+<use P_Value_Means_Top10.png>
+Package pdftex.def Info: P_Value_Means_Top10.png  used on input line 171.
+(pdftex.def)             Requested size: 97.56525pt x 146.7815pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
+
+ []
+
+<Coeff_Est_Top10_P.png, id=30, 381.425pt x 371.3875pt>
+File: Coeff_Est_Top10_P.png Graphic file (type png)
+<use Coeff_Est_Top10_P.png>
+Package pdftex.def Info: Coeff_Est_Top10_P.png  used on input line 184.
+(pdftex.def)             Requested size: 114.42838pt x 111.4171pt.
+<Coeff_Est_Tail10_P.png, id=31, 381.425pt x 367.3725pt>
+File: Coeff_Est_Tail10_P.png Graphic file (type png)
+<use Coeff_Est_Tail10_P.png>
+Package pdftex.def Info: Coeff_Est_Tail10_P.png  used on input line 189.
+(pdftex.def)             Requested size: 114.42838pt x 110.21259pt.
+[3 <./Coeff_Values_Top10.png> <./P_Value_Means_Top10.png> <./Coeff_Est_Top10_P.
+png> <./Coeff_Est_Tail10_P.png>]
+<V_REDOR_TOMATO_kde.png, id=40, 650.43pt x 470.75874pt>
+File: V_REDOR_TOMATO_kde.png Graphic file (type png)
+<use V_REDOR_TOMATO_kde.png>
+Package pdftex.def Info: V_REDOR_TOMATO_kde.png  used on input line 210.
+(pdftex.def)             Requested size: 113.82695pt x 82.384pt.
+<V_STARCHY_POTATO_kde.png, id=41, 653.44125pt x 461.725pt>
+File: V_STARCHY_POTATO_kde.png Graphic file (type png)
+<use V_STARCHY_POTATO_kde.png>
+Package pdftex.def Info: V_STARCHY_POTATO_kde.png  used on input line 215.
+(pdftex.def)             Requested size: 114.35393pt x 80.80309pt.
+<V_REDOR_TOMATO_box_plot.png, id=42, 385.44pt x 280.04625pt>
+File: V_REDOR_TOMATO_box_plot.png Graphic file (type png)
+<use V_REDOR_TOMATO_box_plot.png>
+Package pdftex.def Info: V_REDOR_TOMATO_box_plot.png  used on input line 224.
+(pdftex.def)             Requested size: 115.63289pt x 84.01451pt.
+<V_STARCHY_POTATO_box_plot.png, id=43, 377.41pt x 276.03125pt>
+File: V_STARCHY_POTATO_box_plot.png Graphic file (type png)
+<use V_STARCHY_POTATO_box_plot.png>
+Package pdftex.def Info: V_STARCHY_POTATO_box_plot.png  used on input line 229.
+
+(pdftex.def)             Requested size: 113.22386pt x 82.81pt.
+
+Underfull \hbox (badness 2213) in paragraph at lines 242--243
+\OT1/ptm/m/n/10 with mul-ti-collinear-ity among the in-de-pen-dent vari-ables.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
+
+ []
+
+<Corr_Matrix.png, id=44, 255.95625pt x 262.9825pt>
+File: Corr_Matrix.png Graphic file (type png)
+<use Corr_Matrix.png>
+Package pdftex.def Info: Corr_Matrix.png  used on input line 247.
+(pdftex.def)             Requested size: 89.58601pt x 92.04524pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
+
+ []
+
+<PCA_Analysis.png, id=45, 289.08pt x 289.08pt>
+File: PCA_Analysis.png Graphic file (type png)
+<use PCA_Analysis.png>
+Package pdftex.def Info: PCA_Analysis.png  used on input line 258.
+(pdftex.def)             Requested size: 115.62994pt x 115.62994pt.
+<Log_Reg_PCA_Training_Score.png, id=46, 289.08pt x 289.08pt>
+File: Log_Reg_PCA_Training_Score.png Graphic file (type png)
+<use Log_Reg_PCA_Training_Score.png>
+Package pdftex.def Info: Log_Reg_PCA_Training_Score.png  used on input line 263
+.
+(pdftex.def)             Requested size: 115.62994pt x 115.62994pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
+
+ []
+
+
+Underfull \vbox (badness 2922) has occurred while \output is active []
+
+ [4 <./V_REDOR_TOMATO_kde.png> <./V_STARCHY_POTATO_kde.png> <./V_REDOR_TOMATO_b
+ox_plot.png> <./V_STARCHY_POTATO_box_plot.png> <./Corr_Matrix.png> <./PCA_Analy
+sis.png> <./Log_Reg_PCA_Training_Score.png>]
+<SVM_Train_Score.png, id=57, 433.62pt x 289.08pt>
+File: SVM_Train_Score.png Graphic file (type png)
+<use SVM_Train_Score.png>
+Package pdftex.def Info: SVM_Train_Score.png  used on input line 283.
+(pdftex.def)             Requested size: 130.087pt x 86.72466pt.
+<SVM_Test_Score.png, id=58, 433.62pt x 289.08pt>
+File: SVM_Test_Score.png Graphic file (type png)
+<use SVM_Test_Score.png>
+Package pdftex.def Info: SVM_Test_Score.png  used on input line 288.
+(pdftex.def)             Requested size: 130.087pt x 86.72466pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
+
+ []
+
+<Tree_Train_Score.png, id=59, 433.62pt x 289.08pt>
+File: Tree_Train_Score.png Graphic file (type png)
+<use Tree_Train_Score.png>
+Package pdftex.def Info: Tree_Train_Score.png  used on input line 304.
+(pdftex.def)             Requested size: 130.087pt x 86.72466pt.
+<Tree_Test_Score.png, id=60, 433.62pt x 289.08pt>
+File: Tree_Test_Score.png Graphic file (type png)
+<use Tree_Test_Score.png>
+Package pdftex.def Info: Tree_Test_Score.png  used on input line 309.
+(pdftex.def)             Requested size: 130.087pt x 86.72466pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
+
+ []
+
+<Neural_Network_History.png, id=61, 513.92pt x 321.2pt>
+File: Neural_Network_History.png Graphic file (type png)
+<use Neural_Network_History.png>
+Package pdftex.def Info: Neural_Network_History.png  used on input line 325.
+(pdftex.def)             Requested size: 205.56435pt x 128.47772pt.
+[5 <./SVM_Train_Score.png> <./SVM_Test_Score.png> <./Tree_Train_Score.png> <./T
+ree_Test_Score.png> <./Neural_Network_History.png>]
+(./Topi_Jorid_DATA_793_Final_Report.bbl) [6
+
+]
+(./Topi_Jorid_DATA_793_Final_Report.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 2225 strings out of 492649
+ 31560 string characters out of 6129622
+ 100242 words of memory out of 5000000
+ 6063 multiletter control sequences out of 15000+600000
+ 17294 words of font info for 40 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,8n,25p,871b,274s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texl
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texliv
+e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/
+2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/201
+8/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/u
+rw/times/utmri8a.pfb>
+Output written on Topi_Jorid_DATA_793_Final_Report.pdf (6 pages, 571958 bytes).
+
+PDF statistics:
+ 108 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+
