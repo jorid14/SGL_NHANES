@@ -110,6 +110,6 @@ for k,v in side_dish_fdist.items():
 
 side_dish_fdist_table = pd.DataFrame(item_count, item, columns=['Count'])  
 side_dish_fdist_table = side_dish_fdist_table.sort_values('Count', ascending = False)
-side_dish_fdist_table.to_csv('../Data/side_dish_fdist_table.csv')
+#side_dish_fdist_table.to_csv('../Data/side_dish_fdist_table.csv')
 
 

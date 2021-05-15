@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb  7 10:05:56 2021
-
 @author: Jorid Topi
 
+This script applies the filters and transformations to the NHANES data set,
+in preparation for exploration and modeling.
 
+The transformed data is saved for usage by other scripts.
 """
 
 import pandas as pd
 import regex as re
 
 #Read the NHANES full dataset
-nhanes_full = pd.read_csv('../Data/nhanes_full.csv')
+nhanes_full = pd.read_csv('../../Data/nhanes_full.csv')
 
 '''
 Step #1: Remove columns that are not required, using the variable analysis lookup
@@ -20,7 +21,7 @@ Original data set has 823012x86
 Transformed data set has 823012x50
 '''
 #Use the variable lookup to filter out variables for reducing the dataset
-variable_lookup_full = pd.read_csv('../Analysis/Variable_Analysis_Lookup_NHANES_full.csv')
+variable_lookup_full = pd.read_csv('../../Analysis/Variable_Analysis_Lookup_NHANES_full.csv')
 #Pull out the priority 0 variables, which are dropped from the start
 var_full_pri_0 = variable_lookup_full[variable_lookup_full['Priority'] == 0]
 #Pull out the priority 2 variables, which are dropped from the start
@@ -225,7 +226,7 @@ Step: Save the pre-processed data
 '''
 
 #Save pre-processed data
-nhanes_full.to_pickle('../Data/nhanes_full_pre_proc.pkl')
-nhanes_full.to_csv('../Data/nhanes_full_pre_proc.csv')
+nhanes_full.to_pickle('../../Data/nhanes_full_pre_proc.pkl')
+nhanes_full.to_csv('../../Data/nhanes_full_pre_proc.csv')
 
 

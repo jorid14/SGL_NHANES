@@ -12,7 +12,7 @@ import re
 
 
 #Read the structured dataframe
-df_final = pd.read_pickle('../Data/df_final.pkl')
+df_final = pd.read_pickle('../Data/nhanes_sf_sd_txt_str.pkl')
 df_final_cols = df_final.columns.values.tolist()
 
 #Create a list of all the "SFx" columns, where x is a digit. This pulls in the columns containing the 

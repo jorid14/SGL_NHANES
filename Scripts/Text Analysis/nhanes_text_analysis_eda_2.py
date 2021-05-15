@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb  7 14:15:14 2021
-
 @author: Jorid Topi
 
-This script performs the data structuring tasks as identified by the project objectives
-
-
+This script performs EDA on the text corpora from the NHANES descriptions
 """
 
 import pandas as pd
@@ -16,13 +12,13 @@ from collections import Counter
 
 
 #Read corpora
-food_type_cps= pd.read_pickle('../Data/food_type_cps.pkl')
-seafood_cps = pd.read_pickle('../Data/seafood_cps.pkl')
-side_dish_cps = pd.read_pickle('../Data/side_dish_cps.pkl')
+food_type_cps= pd.read_pickle('../../Data/food_type_cps.pkl')
+seafood_cps = pd.read_pickle('../../Data/seafood_cps.pkl')
+side_dish_cps = pd.read_pickle('../../Data/side_dish_cps.pkl')
 
 
 #Read Seafood DF
-seafood_df = pd.read_pickle('../Data/seafood_df.pkl')
+seafood_df = pd.read_pickle('../../Data/seafood_df.pkl')
 
 
 #Obtain and plot frequency distribution of the side dish words
@@ -78,9 +74,9 @@ seafood_species_count.reset_index(inplace=True)
 seafood_species_count = pd.merge(seafood_species_count, seafood_description_contains_with, how='left', left_on=['index'], right_on=['species'])
 seafood_species_count = pd.merge(seafood_species_count, seafood_description_contains_and, how='left', left_on=['index'], right_on=['species'])
 
-seafood_species_count.to_csv('../Data/seafood_species_count.csv')
-seafood_df['DESCRIPTION'][(seafood_df.DR1I_PF_SEAFD_TOT > 0) & (seafood_df.species == 'seafood')].to_csv('../Data/seafood_description.csv')
-seafood_df.to_csv('../Data/seafood_df.csv')
+#seafood_species_count.to_csv('../Data/seafood_species_count.csv')
+#seafood_df['DESCRIPTION'][(seafood_df.DR1I_PF_SEAFD_TOT > 0) & (seafood_df.species == 'seafood')].to_csv('../Data/seafood_description.csv')
+#seafood_df.to_csv('../Data/seafood_df.csv')
 
 
 tokenizer = nltk.RegexpTokenizer(r"\w+")
@@ -99,7 +95,7 @@ counts = dict(counts)
 df = pd.DataFrame.from_dict(counts, orient = 'index')
 df = df.sort_values(by = 0, ascending=False)
     
-df.to_csv('../Data/counts.csv')    
+#df.to_csv('../Data/counts.csv')    
 
 
 

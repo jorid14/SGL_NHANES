@@ -9,7 +9,7 @@ import pandas as pd
 import re
 
 #Read the structured dataframe
-df_sf_to_sd = pd.read_pickle('../Data/df_sf_to_sd.pkl')
+df_sf_to_sd = pd.read_pickle('../Data/sf_to_sd_association.pkl')
 
 
 #Obtain number of unique side dishes for each seafood type
@@ -28,7 +28,6 @@ sf_to_sd_num['pct'] = sf_to_sd_num['pct'].round(decimals = 2)
 sf_to_sd_num = sf_to_sd_num.sort_values(by=['sf_type', 'pct'], ascending=(True, False))
 
 sf_to_sd_num.to_csv('../Data/sf_to_sd_num.csv')
-#df_sf_to_sd2.to_json('../Data/df_sf_to_sd.json')
 
 
 sf_to_sd_num_grouped = sf_to_sd_num.groupby('sf_type')

@@ -15,6 +15,7 @@ import numpy as np
 import scipy.stats as stat
 import sys
 import time 
+import regex as re
 
 
 
@@ -58,7 +59,7 @@ class LogisticReg:
 
 
 def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num, 
-                        batch_step, non_sfd_class_n, sfd_class_n, test_ratio):
+                        batch_step, non_sfd_class_n, sfd_class_n, test_ratio, dummy_run):
     
     #Model execution start time
     startTime = time.time()
@@ -69,6 +70,33 @@ def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num,
     else: 
         cmb_output = fped_vars
 
+    
+    if (dummy_run == True):
+        cmb_output = []
+        
+        a=[]
+        
+        for i in range(len(fped_vars)):
+            if (re.match(r"(.*)_high", fped_vars[i])):
+                a.append(fped_vars[i])
+                
+           
+        cmb_output = sum([list(map(list, combinations(a , i))) for i in range(len(a ) + 1)], [])
+        
+        
+        
+        #print(cmb_output)
+        
+        for i in range(len(cmb_output)):
+            low_vars = []
+            
+            for j in range(len(cmb_output[i])):
+                low_vars.append(cmb_output[i][j].replace('_high', '')+'_low')
+            for k in range(len(low_vars)):
+                cmb_output[i].append(low_vars[k])  
+        
+        cmb_output = cmb_output[1:]
+
     #Partition the list of FPED variable combinations with batch parameters, if batch run desired
     if (batch_run == True):
         #Obtain batch length and step through the indecies of the variable list
@@ -77,6 +105,7 @@ def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num,
         idx2 = batch_len + batch_len*int(batch_step)
         cmb_output = cmb_output[idx1:idx2]
 
+    #print(len(cmb_output))
     #This is the model fitting loop if combinatorial variable model selection is desired
     if (var_combinatorial == True):
         #Lists for storing the model prediction success rate and variable list
@@ -105,10 +134,11 @@ def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num,
             pred_sr.append(sr)
             var.remove('seafood_meal')
             var_list.append(var)
-            var_idx = cmb_output.index(var)
-            progress_pct = round(100 * var_idx / len(cmb_output), 2)
-            if (progress_pct%1==0):
-                print("Progress: "+str(progress_pct)+" %")
+            #var_idx = cmb_output.index(var)
+            #progress_pct = round(100 * var_idx / len(cmb_output), 2)
+            #if (progress_pct%1==0):
+            #    print("Progress: "+str(progress_pct)+" %")
+            print(var)
         
         #Calculate model execution time for combinatorial variable selection    
         cmb_time = time.time() - startTime  
@@ -149,7 +179,7 @@ def nhanes_full_log_reg(df, fped_vars, var_combinatorial, batch_run, batch_num,
         #Create a dataframe with variables used and their success rate    
         pred_sr_df = pd.DataFrame(pred_sr)
         pred_sr_df = pred_sr_df.rename({0: 'Success Rate'}, axis=1)
-        var_list.remove('seafood_meal')
+        fped_vars.remove('seafood_meal')
         var_list_df = pd.DataFrame([fped_vars])
         model_result = pd.concat([var_list_df, pred_sr_df, non_cmb_time_df], axis=1)
     
@@ -175,12 +205,33 @@ all_vars = ['F_CITMLB', 'F_OTHER', 'F_JUICE', 'F_TOTAL',
 food_cmp_level1 = ['F_TOTAL','V_TOTAL','G_TOTAL','D_TOTAL','OILS', 
                    'SOLID_FATS', 'ADD_SUGARS']
 
+food_cmp_level1x = ['F_TOTAL','V_DRKGR', 'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO', 
+                   'V_STARCHY_OTHER', 'V_OTHER', 'G_TOTAL','D_TOTAL','OILS', 
+                   'SOLID_FATS', 'ADD_SUGARS']
 
-#Level 2 contains the subcomponents of vegetables, grains, 
-#proteins other than meat and seafood, dairy.
+#Level 2 contains the subcomponents of vegetables, grains, and dairy 
 #Keep fruits at total level
 #Include oils, fats, and sugars at this level.
 food_cmp_level2 = ['F_TOTAL', 
+                   'V_DRKGR', 'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO', 
+                   'V_STARCHY_OTHER', 'V_OTHER', 'V_LEGUMES', 
+                   'G_WHOLE','G_REFINED', 
+                   'D_MILK', 'D_YOGURT','D_CHEESE', 
+                   'OILS', 'SOLID_FATS', 'ADD_SUGARS'] 
+
+#Level 3 has all components from level2, 
+#adding a generated total protein component other than meat and seafood
+food_cmp_level3 = ['F_TOTAL', 
+                   'V_DRKGR', 'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO', 
+                   'V_STARCHY_OTHER', 'V_OTHER', 'V_LEGUMES', 
+                   'G_WHOLE','G_REFINED', 
+                   'PF_PLANT_D_TOTAL', 
+                   'D_MILK', 'D_YOGURT','D_CHEESE', 
+                   'OILS', 'SOLID_FATS', 'ADD_SUGARS'] 
+
+#Level 4 has all components from level3, 
+#breaking down the total protein component
+food_cmp_level4 = ['F_TOTAL', 
                    'V_DRKGR', 'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO', 
                    'V_STARCHY_OTHER', 'V_OTHER', 'V_LEGUMES', 
                    'G_WHOLE','G_REFINED', 
@@ -188,36 +239,23 @@ food_cmp_level2 = ['F_TOTAL',
                    'D_MILK', 'D_YOGURT','D_CHEESE', 
                    'OILS', 'SOLID_FATS', 'ADD_SUGARS'] 
 
-#Level 3 has all components of level2, but breaks the total fruit into subcomponents
-food_cmp_level3 = ['F_CITMLB', 'F_OTHER', 'F_JUICE', 
+#Level 5 has all components of level4, but breaks the total fruit into subcomponents
+food_cmp_level5 = ['F_CITMLB', 'F_OTHER', 'F_JUICE', 
                    'V_DRKGR', 'V_REDOR_TOMATO', 'V_REDOR_OTHER', 'V_STARCHY_POTATO', 
                    'V_STARCHY_OTHER', 'V_OTHER', 'V_LEGUMES', 
                    'G_WHOLE','G_REFINED', 
                    'PF_EGGS', 'PF_SOY', 'PF_NUTSDS', 'PF_LEGUMES', 
                    'D_MILK', 'D_YOGURT', 'D_CHEESE', 
-                   'OILS', 'SOLID_FATS', 'ADD_SUGARS']    
+                   'OILS', 'SOLID_FATS', 'ADD_SUGARS', 'A_DRINKS']  
 
-food_cmp_exp = ['F_TOTAL','V_TOTAL','G_TOTAL', 'V_DRKGR',
-                'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO',
-                'V_STARCHY_OTHER', 'V_OTHER', 'V_LEGUMES', 'G_WHOLE', 'ADD_SUGARS']
-
-food_cmp_level4 = ['F_TOTAL', 
-                   'V_DRKGR', 'V_REDOR_TOMATO','V_REDOR_OTHER', 'V_STARCHY_POTATO', 
-                   'V_STARCHY_OTHER', 'V_LEGUMES', 'V_OTHER',
-                   'G_WHOLE','G_REFINED', 
-                   'PF_TOTAL', 
-                   'D_YOGURT', 'D_MILK','D_CHEESE', 
-                   'OILS', 'SOLID_FATS', 'ADD_SUGARS'] 
-
-var_exp = ['V_DRKGR', 'V_REDOR_TOMATO', 'V_REDOR_OTHER',	'V_STARCHY_POTATO',	'V_LEGUMES',	
- 'G_WHOLE',	'G_REFINED','PF_TOTAL',	'D_YOGURT',	'OILS',	'SOLID_FATS', 'ADD_SUGARS']
-
+'''
 #If running by script with arguments
 if len(sys.argv) > 1:
     #Read the pre-processed dataframe.
     df = pd.read_csv('nhanes_full_pre_proc.csv')
+    df['PF_PLANT_D_TOTAL'] = df['PF_EGGS']+df['PF_SOY']+df['PF_NUTSDS']+df['PF_LEGUMES']
     model_res_df = nhanes_full_log_reg(df = df,
-                                       fped_vars = food_cmp_exp, 
+                                       fped_vars = food_cmp_level1, 
                                         var_combinatorial = True, 
                                         batch_run = False, 
                                         batch_num = sys.argv[2], 
@@ -229,16 +267,60 @@ if len(sys.argv) > 1:
     model_res_df.to_csv('model_res_df_'+sys.argv[1]+'.csv')
 #If running with no script arguments    
 else:
-    #Read the pre-processed dataframe.
-    df = pd.read_csv('../Data/nhanes_full_pre_proc.csv')
-    model_res_df = nhanes_full_log_reg(df = df,
-                                       fped_vars = var_exp, 
-                                        var_combinatorial = False, 
-                                        batch_run = False, 
-                                        batch_num = 2, 
-                                        batch_step = 1, 
-                                        non_sfd_class_n = 1000, 
-                                        sfd_class_n = 1000, 
-                                        test_ratio = 0.2)
-    #model_res_df.to_csv('model_res_df.csv')
+'''
+'''
+if (sys.argv[1] == 'L1'):
+    fped_vars = food_cmp_level1
+elif (sys.argv[1] == 'L2'):
+    fped_vars = food_cmp_level2
+elif (sys.argv[1] == 'L3'):
+    fped_vars = food_cmp_level3
+elif (sys.argv[1] == 'L4'):
+    fped_vars = food_cmp_level4
+'''
+#Read the pre-processed dataframe.
+df = pd.read_csv('../Data/nhanes_full_pre_proc.csv')
+df = df[(df['meal_energy']=='Low')]
+#df = df[df['eathome']==1]
+df = df[df['age']>18]
+
+'''
+dummy_total = []
+for var in food_cmp_level5:
+    bins = [-np.inf, 0, np.inf]
+    labels=['low','high']
+    df[var] = pd.cut(df[var], bins=bins, labels=labels)
+    dummies = pd.get_dummies(df[var], prefix=var)
+    dummy_total.append(dummies.columns[0])
+    dummy_total.append(dummies.columns[1])
+    for dummy in dummies.columns:
+        df[dummy] = dummies[dummy]
+'''
+#for var in food_cmp_level2:
+#    df.loc[df[var] > 0, var] = 1
+#df.loc[df['F_TOTAL'] != 'None', 'F_TOTAL'] = "Some"
+#df = df[df['eathome']==1]
+
+sr_tot=[]
+for i in range(100):
+    model_res_df_x = nhanes_full_log_reg(df = df,
+                                   fped_vars = food_cmp_level5, 
+                                    var_combinatorial = False, 
+                                    batch_run = False, 
+                                    batch_num = 2, 
+                                    batch_step = 1, 
+                                    non_sfd_class_n = 500, 
+                                    sfd_class_n = 500, 
+                                    test_ratio = 0.2, 
+                                    dummy_run = False)
+    sr_tot.append(model_res_df_x['Success Rate'][0])
+
+sr_tot = pd.DataFrame(sr_tot)
+sr_tot = sr_tot[0].astype(float)
+print(sr_tot.describe())
+
+
+#model_res_df.to_csv('model_res_df_'+sys.argv[1]+'.csv')
+
+#print(sys.argv[1])
     

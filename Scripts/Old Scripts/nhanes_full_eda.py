@@ -70,30 +70,31 @@ nhanes_sugars_grouped.plot.bar(title = 'Sugars Consumed with Seafood: Home vs Ou
 
 #Define the grouping key by meal. Participant ID, Meal ID, and time of consumption
 meal_key = ['SEQN', 'DR1.030Z', 'DR1.020']
+
+#Find the number of meals where participant ate at home vs out
 nhanes_meal_num = nhanes_full.groupby(meal_key)['eathome'].sum()
+#Number of meals at home
 sf_meals_home = nhanes_meal_num[nhanes_meal_num > 0]
 sf_meals_home_count = sf_meals_home.count()
+#Number of meals outside of home
 sf_meals_out = nhanes_meal_num[nhanes_meal_num == 0]
 sf_meals_out_count = sf_meals_out.count()
 
-
+#Normalize the main components to get the unit value per consumed meal and plot
 nhanes_full_grouped_norm_0 = nhanes_full_grouped.iloc[0]/sf_meals_out_count
 nhanes_full_grouped_norm_1 = nhanes_full_grouped.iloc[1]/sf_meals_home_count
-
 nhnes_full_group_norm = pd.concat([nhanes_full_grouped_norm_0, nhanes_full_grouped_norm_1], axis=1).T
 nhnes_full_group_norm.plot.bar(title = 'FCs Consumed with Seafood: Home vs Out - Normalized')
 
-
+#Normalize the oil and solid fat components to get the unit value per consumed meal and plot
 nhanes_oils_grouped_norm_0 = nhanes_oils_grouped.iloc[0]/sf_meals_out_count
 nhanes_oils_grouped_norm_1 = nhanes_oils_grouped.iloc[1]/sf_meals_home_count
-
 nhnes_oils_group_norm = pd.concat([nhanes_oils_grouped_norm_0, nhanes_oils_grouped_norm_1], axis=1).T
 nhnes_oils_group_norm.plot.bar(title = 'Oils Consumed with Seafood: Home vs Out - Normalized')
 
-
+#Normalize the sugars component to get the unit value per consumed meal and plot
 nhanes_sugars_grouped_norm_0 = nhanes_sugars_grouped.iloc[0]/sf_meals_out_count
 nhanes_sugars_grouped_norm_1 = nhanes_sugars_grouped.iloc[1]/sf_meals_home_count
-
 nhnes_sugars_group_norm = pd.concat([nhanes_sugars_grouped_norm_0, nhanes_sugars_grouped_norm_1], axis=1).T
 nhnes_sugars_group_norm.plot.bar(title = 'Sugars Consumed with Seafood: Home vs Out - Normalized')
 

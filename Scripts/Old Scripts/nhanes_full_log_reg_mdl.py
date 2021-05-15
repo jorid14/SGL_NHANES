@@ -63,9 +63,9 @@ food_cmp_level5 = ['F_CITMLB', 'F_OTHER', 'F_JUICE',
 
 #Read the pre-processed dataframe.
 df = pd.read_csv('../Data/nhanes_full_pre_proc.csv')
-df = df[(df['meal_energy']=='Low')]
+#df = df[(df['meal_energy']=='Low')]
 #df = df[df['eathome']==1]
-df = df[df['age']>18]
+#df = df[df['age']>18]
 
 
 '''
@@ -76,17 +76,43 @@ Combinations to try:
     - Eat home: Meals at home, meals out, all meals
     - Seafood meal threshold: (1) Keep old option (2) Re-categorize meals with both
     - Vegetarian option: (1) Include all (2) Exclude vegeterian meals
+
 '''
+
+def df_filter(df, age , eathome, meal_size_low, meal_size_med_low, meal_size_med_high, meal_size_high):
+    if (age == True):
+        df = df[df['age'] >= 18]
+    if (eathome == True):
+        df = df[df['eathome']==1]
+    if (meal_size_low == True & meal_size_med_low == False & meal_size_med_high == False & meal_size_high == False):
+        df = df[(df['meal_energy']=='Low')]
+    elif (meal_size_low == False & meal_size_med_low == True & meal_size_med_high == False & meal_size_high == False):
+        df = df[(df['meal_energy']=='Medium-Low')]
+    elif (meal_size_low == False & meal_size_med_low == False & meal_size_med_high == True & meal_size_high == False):
+        df = df[(df['meal_energy']=='Medium-High')]
+    elif (meal_size_low == False & meal_size_med_low == False & meal_size_med_high == False & meal_size_high == True):
+        df = df[(df['meal_energy']=='High')]
+    elif (meal_size_low == True & meal_size_med_low == True & meal_size_med_high == False & meal_size_high == False):
+       df = df[(df['meal_energy']== 'Low' | df['meal_energy']=='Medium-Low')]
+       print('hey')
+        
+
+    return df
+    
+    
+
+
 
 
 sr_tot=[]
-for i in range(100):
+for i in range(1):
     model_res_df_x = nhanes_full_log_reg(df = df,
                                    fped_vars = food_cmp_level5, 
                                    non_sfd_class_n = 500, 
                                    sfd_class_n = 500, 
                                    test_ratio = 0.2, )
     sr_tot.append(model_res_df_x['Success Rate'][0])
+
 
 sr_tot = pd.DataFrame(sr_tot)
 sr_tot = sr_tot[0].astype(float)
